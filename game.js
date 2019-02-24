@@ -2,6 +2,11 @@ const GRID_SCALE = 10;
 let snake;
 let food;
 
+// GLOBAL TODO:
+// - Collision against wall
+// - Collision against snake itself
+// - fix game-grid (positioning seems to be off (?)
+
 function setup() {
   createCanvas(300, 300);
   frameRate(10);
@@ -18,18 +23,15 @@ function draw() {
   snake.update();
   snake.show();
 
-  // Check if snake-_position matches food _position
+  // Check if snake-position matches food-position
   if (snake.eat(food.getPosition())) {
-    // TODO:
-    // - enlarge snake
-    // --> draw other parts of snake
-    // - ensure new location of food does not equal any _position of snake
-    food.pickLocation(snake.currentPosition());
+    food.pickLocation(snake.blockedPositions());
   }
 
   food.show();
 }
 
+// Internal method by P5
 function keyPressed() {
   // UP
   if (keyCode === 38) {
