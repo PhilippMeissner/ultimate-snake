@@ -1,6 +1,7 @@
 const GRID_SCALE = 10;
 let snake;
 let food;
+let canChangeDirection = true;
 
 // GLOBAL TODO:
 // - Collision against wall
@@ -29,27 +30,34 @@ function draw() {
   }
 
   food.show();
+  canChangeDirection = true;
 }
 
 // Internal method by P5
 function keyPressed() {
-  // UP
-  if (keyCode === 38) {
-    snake.changeDirection(0, -1);
-  }
+  if (canChangeDirection) {
+    // UP
+    if (keyCode === 38) {
+      snake.changeDirection(0, -1);
+      canChangeDirection = false;
+    }
 
-  // DOWN
-  if (keyCode === 40) {
-    snake.changeDirection(0, 1);
-  }
+    // DOWN
+    if (keyCode === 40) {
+      snake.changeDirection(0, 1);
+      canChangeDirection = false;
+    }
 
-  // RIGHT
-  if (keyCode === 39) {
-    snake.changeDirection(1, 0);
-  }
+    // RIGHT
+    if (keyCode === 39) {
+      snake.changeDirection(1, 0);
+      canChangeDirection = false;
+    }
 
-  // LEFT
-  if (keyCode === 37) {
-    snake.changeDirection(-1, 0);
+    // LEFT
+    if (keyCode === 37) {
+      snake.changeDirection(-1, 0);
+      canChangeDirection = false;
+    }
   }
 }
